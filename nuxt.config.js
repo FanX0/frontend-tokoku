@@ -53,5 +53,11 @@ export default {
   loading: {
     color: 'white',	// <-- color
     height: '5px'	// <-- height
-  }
+  },
+
+  //rendering mode SSR
+  ssr: true,
+
+  // Target Deployment
+  target: 'server',
 }
