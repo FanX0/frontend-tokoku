@@ -48,5 +48,10 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     baseURL: 'http://localhost:8000'
+  },
+
+  loading: {
+    color: 'white',	// <-- color
+    height: '5px'	// <-- height
   }
 }
