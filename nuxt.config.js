@@ -64,7 +64,10 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     //https://dev.auth.nuxtjs.org/
-  '@nuxtjs/auth-next',
+    '@nuxtjs/auth-next',
+    //https://github.com/avil13/vue-sweetalert2
+   'vue-sweetalert2/nuxt',
+
   ],
 
   auth: {
