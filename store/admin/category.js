@@ -57,4 +57,32 @@ export const actions = {
 
   },
 
+  //store category
+  storeCategory({ dispatch, commit }, payload) {
+
+      //set promise
+      return new Promise((resolve, reject) => {
+
+          //store to Rest API "/api/admin/categories" with method "POST"
+          this.$axios.post('/api/admin/categories', payload)
+
+          //success
+          .then(() => {
+
+              //dispatch action "getCategoriesData"
+              dispatch('getCategoriesData')
+
+              //resolve promise
+              resolve()
+
+          })
+
+          //error
+          .catch(error => {
+              reject(error)
+          })
+
+      })
+  },
+
 }
