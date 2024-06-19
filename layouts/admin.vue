@@ -2,7 +2,7 @@
   <div class="c-app">
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
       <div class="c-sidebar-brand d-lg-down-none">
-        <img src="/images/ias.png" class="bg-light rounded shadow-sm p-2" width="35"> <span class="ml-2 font-weight-bold">MI STORE</span>
+        <img src="/images/ias.png" class=" rounded shadow-sm p-2" width="35"> <span class="ml-2 font-weight-bold">Iaastanti Glowscare</span>
       </div>
 
       <!-- sidebar -->
@@ -23,8 +23,7 @@
         <!-- end content -->
 
         <footer class="c-footer">
-          <div><strong>MI STORE</strong> &copy; 2021 - SantriKoding.com.</div>
-          <div class="ml-auto">Template by&nbsp;<a href="https://coreui.io/">CoreUI</a></div>
+          <div>&copy;  <strong>Iaastanti Glowscare</strong>  </div>
         </footer>
       </div>
     </div>
