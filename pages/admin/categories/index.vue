@@ -28,11 +28,6 @@
                       <img class="img-fluid" width="50" :src="data.item.image" />
                   </template>
                 </b-table>
-
-                <!-- pagination -->
-                <b-pagination align="right" :value="categories.current_page" :total-rows="categories.total"
-                  :per-page="categories.per_page" @change="changePage" aria-controls="my-table"></b-pagination>
-
               </div>
             </div>
           </div>
@@ -102,16 +97,6 @@
 
             //commit to mutation "SET_PAGE"
             this.$store.commit('admin/category/SET_PAGE', 1)
-
-            //dispatch on action "getCategoriesData"
-            this.$store.dispatch('admin/category/getCategoriesData', this.search)
-        },
-
-        //method "changePage"
-        changePage(page) {
-
-            //commit to mutation "SET_PAGE"
-            this.$store.commit('admin/category/SET_PAGE', page)
 
             //dispatch on action "getCategoriesData"
             this.$store.dispatch('admin/category/getCategoriesData', this.search)
