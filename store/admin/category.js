@@ -7,8 +7,8 @@ export const state = () => ({
   //page
   page: 1,
 
-   //category
-   category: {}
+  //category
+  category: {}
 
 })
 
@@ -29,14 +29,12 @@ export const mutations = {
       state.page = payload
   },
 
-    //mutation "SET_CATEGORY_DATA"
-    SET_CATEGORY_DATA(state, payload) {
+  //mutation "SET_CATEGORY_DATA"
+  SET_CATEGORY_DATA(state, payload) {
 
       //set value state "category"
       state.category = payload
   },
-
-
 
 }
 
@@ -97,55 +95,80 @@ export const actions = {
       })
   },
 
- //get detail category
- getDetailCategory({ commit }, payload) {
+  //get detail category
+  getDetailCategory({ commit }, payload) {
 
-  //set promise
-  return new Promise((resolve, reject) => {
+      //set promise
+      return new Promise((resolve, reject) => {
 
-      //get to Rest API "/api/admin/categories/:id" with method "GET"
-      this.$axios.get(`/api/admin/categories/${payload}`)
+          //get to Rest API "/api/admin/categories/:id" with method "GET"
+          this.$axios.get(`/api/admin/categories/${payload}`)
 
-      //success
-      .then(response => {
+          //success
+          .then(response => {
 
-          //commit to mutation "SET_CATEGORY_DATA"
-          commit('SET_CATEGORY_DATA', response.data.data)
+              //commit to mutation "SET_CATEGORY_DATA"
+              commit('SET_CATEGORY_DATA', response.data.data)
 
-          //resolve promise
-          resolve()
+              //resolve promise
+              resolve()
+
+          })
 
       })
 
-  })
-
-},
+  },
 
   //update category
   updateCategory({ dispatch, commit }, { categoryId, payload }) {
 
-    //set promise
-    return new Promise((resolve, reject) => {
+      //set promise
+      return new Promise((resolve, reject) => {
 
-        //store to Rest API "/api/admin/categories/:id" with method "POST"
-        this.$axios.post(`/api/admin/categories/${categoryId}`, payload)
+          //store to Rest API "/api/admin/categories/:id" with method "POST"
+          this.$axios.post(`/api/admin/categories/${categoryId}`, payload)
 
-        //success
-        .then(() => {
+          //success
+          .then(() => {
 
-            //dispatch action "getCategoriesData"
-            dispatch('getCategoriesData')
+              //dispatch action "getCategoriesData"
+              dispatch('getCategoriesData')
 
-            //resolve promise
-            resolve()
+              //resolve promise
+              resolve()
 
-        })
+          })
 
-        //error
-        .catch(error => {
-            reject(error)
-        })
+          //error
+          .catch(error => {
+              reject(error)
+          })
 
-    })
-},
+      })
+  },
+
+  //destroy category
+  destroyCategory({ dispatch, commit }, payload) {
+
+      //set promise
+      return new Promise((resolve, reject) => {
+
+          //delete to Rest API "/api/admin/categories/:id" with method "DELETE"
+          this.$axios.delete(`/api/admin/categories/${payload}`)
+
+          //success
+          .then(() => {
+
+              //dispatch action "getCategoriesData"
+              dispatch('getCategoriesData')
+
+              //resolve promise
+              resolve()
+
+          })
+
+      })
+
+  },
+
 }
