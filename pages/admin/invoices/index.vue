@@ -12,7 +12,7 @@
 
                 <div class="form-group">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="cari berdasarkan no. invoice">
+                      <input type="text" class="form-control" v-model="search" @keypress.enter="searchData" placeholder="cari berdasarkan no. invoice">
                         <div class="input-group-append">
                             <button class="btn btn-warning"><i class="fa fa-search"></i>
                             SEARCH
@@ -82,6 +82,8 @@
             tdClass: 'text-center'
           }
         ],
+          //state search
+        search: ''
       }
     },
 
@@ -98,8 +100,22 @@
             return this.$store.state.admin.invoice.invoices
         },
     },
+  //method
+  methods: {
 
-  }
+//method "searchData"
+searchData() {
+
+  //commit to mutation "SET_PAGE"
+  this.$store.commit('admin/invoice/SET_PAGE', 1)
+
+  //dispatch on action "getInvoicesData"
+  this.$store.dispatch('admin/invoice/getInvoicesData', this.search)
+}
+
+}
+
+}
 </script>
 
 <style>
