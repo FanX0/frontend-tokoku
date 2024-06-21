@@ -33,11 +33,12 @@
                     <b-button :to="{name: 'admin-users-edit-id', params: {id: row.item.id}}" variant="info" size="sm">
                       EDIT
                     </b-button>
+                    <b-button variant="danger" size="sm" @click="destroyUser(row.item.id)">DELETE</b-button>
                   </template>
                 </b-table>
 
-                 <!-- pagination -->
-                 <b-pagination align="right" :value="users.current_page" :total-rows="users.total"
+                <!-- pagination -->
+                <b-pagination align="right" :value="users.current_page" :total-rows="users.total"
                   :per-page="users.per_page" @change="changePage" aria-controls="my-table"></b-pagination>
 
               </div>
@@ -103,7 +104,7 @@
     //method
     methods: {
 
-       //method "searchData"
+        //method "searchData"
         searchData() {
 
             //commit to mutation "SET_PAGE"
@@ -112,15 +113,51 @@
             //dispatch on action "getUsersData"
             this.$store.dispatch('admin/user/getUsersData', this.search)
         },
-          //method "changePage"
-          changePage(page) {
+
+        //method "changePage"
+        changePage(page) {
 
             //commit to mutation "SET_PAGE"
             this.$store.commit('admin/user/SET_PAGE', page)
 
             //dispatch on action "getUsersData"
             this.$store.dispatch('admin/user/getUsersData', this.search)
-},
+        },
+
+        //method "destroyUser"
+        destroyUser(id) {
+          this.$swal.fire({
+            title: 'APAKAH ANDA YAKIN ?',
+            text: "INGIN MENGHAPUS DATA INI !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'YA, HAPUS!',
+            cancelButtonText: 'TIDAK',
+          }).then((result) => {
+            if (result.isConfirmed) {
+
+              //dispatch to action "destroyUser" vuex
+              this.$store.dispatch('admin/user/destroyUser', id)
+                .then(() => {
+
+                  //feresh data
+                  this.$nuxt.refresh()
+
+                  //alert
+                  this.$swal.fire({
+                    title: 'BERHASIL!',
+                    text: "Data Berhasil Dihapus!",
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                  })
+
+                })
+            }
+          })
+        }
     }
 
   }

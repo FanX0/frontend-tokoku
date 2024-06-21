@@ -147,4 +147,28 @@ export const actions = {
       })
   },
 
+  //destroy user
+  destroyUser({ dispatch, commit }, payload) {
+
+      //set promise
+      return new Promise((resolve, reject) => {
+
+          //delete to Rest API "/api/admin/users/:id" with method "DELETE"
+          this.$axios.delete(`/api/admin/users/${payload}`)
+
+          //success
+          .then(() => {
+
+              //dispatch action "getUsersData"
+              dispatch('getUsersData')
+
+              //resolve promise
+              resolve()
+
+          })
+
+      })
+
+  }
+
 }
