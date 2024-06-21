@@ -19,6 +19,10 @@
                   </template>
                 </b-table>
 
+                <!-- pagination -->
+                <b-pagination align="right" :value="sliders.current_page" :total-rows="sliders.total"
+                  :per-page="sliders.per_page" @change="changePage" aria-controls="my-table"></b-pagination>
+
               </div>
             </div>
           </div>
@@ -76,6 +80,20 @@
             return this.$store.state.admin.slider.sliders
         },
     },
+
+    //method
+    methods: {
+
+        //method "changePage"
+        changePage(page) {
+
+            //commit to mutation "SET_PAGE"
+            this.$store.commit('admin/slider/SET_PAGE', page)
+
+            //dispatch on action "getSlidersData"
+            this.$store.dispatch('admin/slider/getSlidersData', this.search)
+        },
+    }
 
   }
 </script>
