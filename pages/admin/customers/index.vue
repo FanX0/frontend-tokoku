@@ -12,7 +12,7 @@
 
                 <div class="form-group">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="cari berdasarkan nama customer">
+                    <input type="text" class="form-control"  v-model="search" @keypress.enter="searchData"  placeholder="cari berdasarkan nama customer">
                     <div class="input-group-append">
                       <button class="btn btn-warning"><i class="fa fa-search"></i>
                         SEARCH
@@ -63,6 +63,8 @@
             key: 'created_at'
           }
         ],
+         //state search
+         search: ''
       }
     },
 
@@ -79,6 +81,19 @@
         return this.$store.state.admin.customer.customers
       },
     },
+      //method
+      methods: {
+
+//method "searchData"
+searchData() {
+
+    //commit to mutation "SET_PAGE"
+    this.$store.commit('admin/customer/SET_PAGE', 1)
+
+    //dispatch on action "getCustomersData"
+    this.$store.dispatch('admin/customer/getCustomersData', this.search)
+},
+      }
 
   }
 </script>
