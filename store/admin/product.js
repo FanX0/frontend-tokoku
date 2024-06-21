@@ -145,4 +145,28 @@ updateProduct({ dispatch, commit }, { productId, payload }) {
 
   })
 },
+  //destroy products
+  destroyProduct({ dispatch, commit }, payload) {
+
+    //set promise
+    return new Promise((resolve, reject) => {
+
+        //delete to Rest API "/api/admin/products/:id" with method "DELETE"
+        this.$axios.delete(`/api/admin/products/${payload}`)
+
+        //success
+        .then(() => {
+
+            //dispatch action "getProductsData"
+            dispatch('getProductsData')
+
+            //resolve promise
+            resolve()
+
+        })
+
+    })
+
+}
+
 }
