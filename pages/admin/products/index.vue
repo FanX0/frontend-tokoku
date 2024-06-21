@@ -25,7 +25,12 @@
                     </div>
                 </div>
 
-                <b-table striped bordered hover :items="products.data" :fields="fields" show-empty>
+                <b-table striped bordered hover :items="products.data" :fields="fields" show-empty>\
+                  <template v-slot:cell(actions)="row">
+                   <b-button :to="{name: 'admin-products-edit-id', params: {id: row.item.id}}" variant="info" size="sm">
+                      EDIT
+                    </b-button>
+                  </template>
                 </b-table>
 
                 <!-- pagination -->
