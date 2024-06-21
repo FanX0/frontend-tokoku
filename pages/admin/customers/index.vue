@@ -12,9 +12,9 @@
 
                 <div class="form-group">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control"  v-model="search" @keypress.enter="searchData"  placeholder="cari berdasarkan nama customer">
+                    <input type="text" class="form-control" v-model="search" @keypress.enter="searchData" placeholder="cari berdasarkan nama customer">
                     <div class="input-group-append">
-                      <button class="btn btn-warning"><i class="fa fa-search"></i>
+                      <button @click="searchData" class="btn btn-warning"><i class="fa fa-search"></i>
                         SEARCH
                       </button>
                     </div>
@@ -23,6 +23,10 @@
 
                 <b-table striped bordered hover :items="customers.data" :fields="fields" show-empty>
                 </b-table>
+
+                <!-- pagination -->
+                <b-pagination align="right" :value="customers.current_page" :total-rows="customers.total"
+                  :per-page="customers.per_page" @change="changePage" aria-controls="my-table"></b-pagination>
 
               </div>
             </div>
@@ -63,8 +67,9 @@
             key: 'created_at'
           }
         ],
-         //state search
-         search: ''
+
+        //state search
+        search: ''
       }
     },
 
@@ -81,19 +86,31 @@
         return this.$store.state.admin.customer.customers
       },
     },
-      //method
-      methods: {
 
-//method "searchData"
-searchData() {
+    //method
+    methods: {
 
-    //commit to mutation "SET_PAGE"
-    this.$store.commit('admin/customer/SET_PAGE', 1)
+        //method "searchData"
+        searchData() {
 
-    //dispatch on action "getCustomersData"
-    this.$store.dispatch('admin/customer/getCustomersData', this.search)
-},
-      }
+            //commit to mutation "SET_PAGE"
+            this.$store.commit('admin/customer/SET_PAGE', 1)
+
+            //dispatch on action "getCustomersData"
+            this.$store.dispatch('admin/customer/getCustomersData', this.search)
+        },
+
+        //method "changePage"
+        changePage(page) {
+
+            //commit to mutation "SET_PAGE"
+            this.$store.commit('admin/customer/SET_PAGE', page)
+
+            //dispatch on action "getCustomersData"
+            this.$store.dispatch('admin/customer/getCustomersData', this.search)
+        },
+
+    }
 
   }
 </script>
