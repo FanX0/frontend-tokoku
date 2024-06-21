@@ -84,14 +84,14 @@ a:hover {
 
 .btn-warning {
     color: #fff;
-    background-color: #171405!important;
-    border-color: #171405!important;
+    background-color:#dc143c!important;
+    border-color: #dc143c!important;
 }
 
 .btn-warning:hover {
     color: #fff;
-    background-color: #171405!important;
-    border-color: #171405!important
+    background-color: #dc143c!important;
+    border-color: #dc143c!important
 }
 
 .btn-warning-2 {
