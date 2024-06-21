@@ -16,9 +16,9 @@
                             <nuxt-link :to="{name: 'admin-users-create'}" class="btn btn-warning btn-sm" style="padding-top: 10px;">
                             <i class="fa fa-plus-circle"></i> ADD NEW</nuxt-link>
                         </div>
-                        <input type="text" class="form-control" placeholder="cari berdasarkan nama user">
+                        <input type="text" class="form-control" v-model="search" @keypress.enter="searchData" placeholder="cari berdasarkan nama user">
                         <div class="input-group-append">
-                            <button class="btn btn-warning"><i class="fa fa-search"></i>
+                            <button @click="searchData" class="btn btn-warning"><i class="fa fa-search"></i>
                             SEARCH
                             </button>
                         </div>
@@ -71,6 +71,9 @@
             tdClass: 'text-center'
           }
         ],
+
+        //state search
+        search: ''
       }
     },
 
@@ -87,6 +90,20 @@
             return this.$store.state.admin.user.users
         },
     },
+
+    //method
+    methods: {
+
+       //method "searchData"
+        searchData() {
+
+            //commit to mutation "SET_PAGE"
+            this.$store.commit('admin/user/SET_PAGE', 1)
+
+            //dispatch on action "getUsersData"
+            this.$store.dispatch('admin/user/getUsersData', this.search)
+        },
+    }
 
   }
 </script>
