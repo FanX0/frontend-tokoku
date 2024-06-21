@@ -57,4 +57,32 @@ export const actions = {
 
   },
 
+  //store slider
+  storeSlider({ dispatch, commit }, payload) {
+
+      //set promise
+      return new Promise((resolve, reject) => {
+
+          //store to Rest API "/api/admin/sliders" with method "POST"
+          this.$axios.post('/api/admin/sliders', payload)
+
+          //success
+          .then(() => {
+
+              //dispatch action "getSlidersData"
+              dispatch('getSlidersData')
+
+              //resolve promise
+              resolve()
+
+          })
+
+          //error
+          .catch(error => {
+              reject(error)
+          })
+
+      })
+  },
+
 }
