@@ -31,6 +31,10 @@
                   </template>
                 </b-table>
 
+                 <!-- pagination -->
+                 <b-pagination align="right" :value="users.current_page" :total-rows="users.total"
+                  :per-page="users.per_page" @change="changePage" aria-controls="my-table"></b-pagination>
+
               </div>
             </div>
           </div>
@@ -103,6 +107,15 @@
             //dispatch on action "getUsersData"
             this.$store.dispatch('admin/user/getUsersData', this.search)
         },
+          //method "changePage"
+          changePage(page) {
+
+            //commit to mutation "SET_PAGE"
+            this.$store.commit('admin/user/SET_PAGE', page)
+
+            //dispatch on action "getUsersData"
+            this.$store.dispatch('admin/user/getUsersData', this.search)
+},
     }
 
   }
