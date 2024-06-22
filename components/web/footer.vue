@@ -1,11 +1,11 @@
 <template>
-  <footer class="pt-5" style="background: rgb(255, 255, 255); border-top: 5px solid rgb(230 74 26);">
+  <footer class="pt-5" style="background: rgb(255, 255, 255); border-top: 5px solid #3c4b64;">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-5 mb-4">
           <h4 class="font-weight-bold">TENTANG</h4>
           <hr style="border-top: 3px solid rgb(226, 232, 240); border-radius: 0.5rem;">
-          <p> Mi Store Official Terpercaya di Indonesia. Jual Beli Aman &amp; Harga Termurah! Belanja
+          <p> IASSTANTI GLOWSCARE Terpercaya di Indonesia. Jual Beli Aman &amp; Harga Termurah! Belanja
             sekarang. </p>
         </div>
         <div class="col-md-3 mb-4">
