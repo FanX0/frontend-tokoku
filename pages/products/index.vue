@@ -30,6 +30,14 @@
 
       </div>
 
+        <!-- pagination -->
+        <div class="row justify-content-center mt-4 mb-4">
+          <div class="text-center">
+              <b-pagination align="center" :value="products.current_page" :total-rows="products.total"
+                  :per-page="products.per_page" @change="changePage" aria-controls="my-table"></b-pagination>
+          </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -78,7 +86,19 @@ export default {
             return this.$store.state.web.product.products
         },
     },
+     //method
+     methods: {
 
+    //method "changePage"
+    changePage(page) {
+
+      //commit to mutation "SET_PAGE"
+      this.$store.commit('web/product/SET_PAGE', page)
+
+      //dispatch on action "getProductsData"
+      this.$store.dispatch('web/product/getProductsData')
+    },
+  }
 }
 </script>
 
