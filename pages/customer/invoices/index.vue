@@ -35,6 +35,11 @@
                 <button v-if="row.item.status == 'failed'" class="btn btn-sm btn-danger"><i class="fa fa-times-circle"></i> {{ row.item.status }}</button>
               </template>
             </b-table>
+
+            <!-- pagination -->
+            <b-pagination align="right" :value="invoices.current_page" :total-rows="invoices.total"
+              :per-page="invoices.per_page" @change="changePage" aria-controls="my-table"></b-pagination>
+
           </div>
         </div>
       </div>
@@ -121,7 +126,17 @@
 
             //dispatch on action "getInvoicesData"
             this.$store.dispatch('customer/invoice/getInvoicesData', this.search)
-        }
+        },
+
+        //method "changePage"
+        changePage(page) {
+
+            //commit to mutation "SET_PAGE"
+            this.$store.commit('customer/invoice/SET_PAGE', page)
+
+            //dispatch on action "getInvoicesData"
+            this.$store.dispatch('customer/invoice/getInvoicesData', this.search)
+        },
     }
 
   }
