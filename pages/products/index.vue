@@ -52,12 +52,12 @@ export default {
         meta: [{
             hid: 'og:title',
             name: 'og:title',
-            content: 'IAASTANTI GLOWSCARE'
+            content: 'Semua Produk - IAASTANTI GLOWSCARE'
           },
           {
             hid: 'og:site_name',
             name: 'og:site_name',
-            content: 'IAASTANTI GLOWSCARE'
+            content: 'Semua Produk -IAASTANTI GLOWSCARE'
           },
           {
             hid: 'og:image',
@@ -67,7 +67,7 @@ export default {
           {
             hid: 'description',
             name: 'description',
-            content: 'Toko Online IAASTANTI GLOWSCARE'
+            content: 'Semua Produk dari IAASTANTI GLOWSCARE'
           },
         ]
       }
