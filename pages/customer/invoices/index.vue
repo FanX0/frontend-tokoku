@@ -34,6 +34,11 @@
                 <button v-if="row.item.status == 'expired'" class="btn btn-sm btn-warning-2"><i class="fa fa-exclamation-triangle"></i> {{ row.item.status }}</button>
                 <button v-if="row.item.status == 'failed'" class="btn btn-sm btn-danger"><i class="fa fa-times-circle"></i> {{ row.item.status }}</button>
               </template>
+              <template v-slot:cell(actions)="row">
+               <b-button :to="{name: 'customer-invoices-show-snap_token', params: {snap_token: row.item.snap_token}}" variant="info" size="sm">
+                  DETAIL
+                </b-button>
+               </template>
             </b-table>
 
             <!-- pagination -->
