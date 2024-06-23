@@ -17,11 +17,12 @@
                   <button @click="searchData" class="btn btn-primary search-button"> <i class="fa fa-search"></i> </button>
                 </div>
               </div>
+
             </div>
           </div>
           <div class="col-lg-5 col-xl-4 col-sm-8 col-md-4 col-7">
             <div class="d-flex justify-content-end">
-              <a href="#" class="btn search-button btn-md d-md-block ml-4"><i class="fa fa-shopping-cart"></i> <span class="ml-2">0</span> | Rp. 0</a>
+              <nuxt-link :to="{name: 'cart'}" class="btn search-button btn-md d-md-block ml-4"><i class="fa fa-shopping-cart"></i> <span class="ml-2">{{ cartTotal }}</span> | Rp. {{ formatPrice(cartPrice) }}</nuxt-link>
             </div>
           </div>
         </div>
@@ -34,11 +35,6 @@
             <input type="search" name="search" class="form-control" v-model="search" @keypress.enter="searchData" placeholder="mau belanja apa hari ini ?">
             <div class="input-group-append">
               <button @click="searchData" class="btn btn-warning"> <i class="fa fa-search"></i></button>
-            </div>
-          </div>
-          <div class="col-lg-5 col-xl-4 col-sm-8 col-md-4 col-7">
-            <div class="d-flex justify-content-end">
-              <nuxt-link :to="{name: 'cart'}" class="btn search-button btn-md d-md-block ml-4"><i class="fa fa-shopping-cart"></i> <span class="ml-2">{{ cartTotal }}</span> | Rp. {{ formatPrice(cartPrice) }}</nuxt-link>
             </div>
           </div>
         </div>
