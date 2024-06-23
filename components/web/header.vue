@@ -6,15 +6,15 @@
           <div class="col-lg-3 col-sm-4 col-md-4 col-5">
               <nuxt-link to="/" class="brand-wrap" data-abc="true">
                 <img src="/images/ias.png" width="35" class=" p-2 rounded">
-                <!-- <span class=" pb-4 logo">IAASTANTI</span> -->
+                <!-- <span class="logo">IAS</span> -->
               </nuxt-link>
           </div>
           <div class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block">
             <div class="search-wrap">
               <div class="input-group w-100">
-                <input type="text" class="form-control search-form" style="width:55%;" placeholder="mau belanja apa hari ini ?">
+                <input type="text" class="form-control search-form" v-model="search" @keypress.enter="searchData" style="width:55%;" placeholder="mau belanja apa hari ini ?">
                 <div class="input-group-append">
-                  <button class="btn btn-primary search-button"> <i class="fa fa-search"></i> </button>
+                  <button @click="searchData" class="btn btn-primary search-button"> <i class="fa fa-search"></i> </button>
                 </div>
               </div>
             </div>
@@ -32,9 +32,9 @@
         <div class="d-md-none my-2">
           <div class="input-group">
             <input type="search" name="search" class="form-control" v-model="search" @keypress.enter="searchData" placeholder="mau belanja apa hari ini ?">
-              <div class="input-group-append">
-                  <button @click="searchData" class="btn btn-warning"> <i class="fa fa-search"></i></button>
-              </div>
+            <div class="input-group-append">
+              <button @click="searchData" class="btn btn-warning"> <i class="fa fa-search"></i></button>
+            </div>
           </div>
         </div>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#dropdown6"
@@ -91,8 +91,9 @@
         return this.$store.state.web.category.categories
       },
     },
-     //data function
-     data() {
+
+    //data function
+    data() {
       return {
 
         //state search
