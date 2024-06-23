@@ -31,10 +31,10 @@
       <div class="container-fluid">
         <div class="d-md-none my-2">
           <div class="input-group">
-            <input type="search" name="search" class="form-control" placeholder="mau belanja apa hari ini ?">
-            <div class="input-group-append">
-              <button class="btn btn-warning"> <i class="fa fa-search"></i></button>
-            </div>
+            <input type="search" name="search" class="form-control" v-model="search" @keypress.enter="searchData" placeholder="mau belanja apa hari ini ?">
+              <div class="input-group-append">
+                  <button @click="searchData" class="btn btn-warning"> <i class="fa fa-search"></i></button>
+              </div>
           </div>
         </div>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#dropdown6"
@@ -90,6 +90,26 @@
       categories() {
         return this.$store.state.web.category.categories
       },
+    },
+     //data function
+     data() {
+      return {
+
+        //state search
+        search: ''
+      }
+    },
+
+    //method
+    methods: {
+      searchData() {
+        this.$router.push({
+          name: 'search',
+          query: {
+            q: this.search
+          }
+        });
+      }
     }
 
   }
