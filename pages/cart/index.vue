@@ -68,7 +68,7 @@
                   <td class="set-td border-0 text-right">&nbsp; : Rp.</td>
                   <td class="set-td border-0 text-right">
                     <p class="m-0" id="ongkir-cart">
-
+                      {{ formatPrice(courier.courier_cost) }}
                     </p>
                   </td>
                 </tr>
@@ -79,7 +79,7 @@
                   <td class=" border-0 text-right">&nbsp; : Rp.</td>
                   <td class=" border-0 text-right">
                     <p class="font-weight-bold m-0 h5" align="right">
-
+                      {{ formatPrice(grandTotal) }}
                     </p>
                   </td>
                 </tr>
@@ -119,6 +119,61 @@
 
               <div class="col-md-12">
                 <div class="form-group">
+                  <label class="font-weight-bold">PROVINSI</label>
+                  <select class="form-control" v-model="rajaongkir.province_id" @change="getCities">
+                    <option value="">-- pilih provinsi --</option>
+                    <option v-for="province in provinces" :key="province.id" :value="province.province_id">
+                      {{ province.name }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="font-weight-bold">KOTA / KABUPATEN</label>
+                  <select class="form-control" v-model="rajaongkir.city_id" @change="showCourier">
+                    <option value="">-- pilih kota --</option>
+                    <option v-for="city in cities" :key="city.id" :value="city.city_id">{{ city.name }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group" v-if="courier.showCourier">
+                  <label class="font-weight-bold">KURIR PENGIRIMAN</label>
+                  <br>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input select-courier" type="radio" name="courier" id="ongkos_kirim-jne"
+                      value="jne" v-model="courier.courier_name" @change="showService">
+                    <label class="form-check-label font-weight-bold mr-4" for="ongkos_kirim-jne">
+                      JNE</label>
+                    <input class="form-check-input select-courier" type="radio" name="courier" id="ongkos_kirim-tiki"
+                      value="tiki" v-model="courier.courier_name" @change="showService">
+                    <label class="form-check-label font-weight-bold mr-4" for="ongkos_kirim-jnt">TIKI</label>
+                    <input class="form-check-input select-courier" type="radio" name="courier" id="ongkos_kirim-pos"
+                      value="pos" v-model="courier.courier_name" @change="showService">
+                    <label class="form-check-label font-weight-bold" for="ongkos_kirim-jnt">POS</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group" v-if="courier.showService">
+                  <hr>
+                  <label class="font-weight-bold">SERVICE KURIR</label>
+                  <br>
+                  <div v-for="value in costs" :key="value.service" class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="cost" :id="value.service"
+                      :value="value.cost[0].value+'|'+value.service" v-model="courier.courier_service_cost"
+                      @change="getServiceCost">
+                    <label class="form-check-label font-weight-normal mr-5" :for="value.service">
+                      {{ value.service }} - Rp. {{ formatPrice(value.cost[0].value) }}</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
                   <label class="font-weight-bold">ALAMAT LENGKAP</label>
                   <textarea class="form-control" id="alamat" rows="3" placeholder="Alamat Lengkap"
                     v-model="customer.address"></textarea>
@@ -126,6 +181,10 @@
                     Masukkan Alamat Lengkap
                   </div>
                 </div>
+              </div>
+
+               <div class="col-md-12" v-if="btnCheckout">
+                <button class="btn btn-warning btn-lg btn-block">CHECKOUT</button>
               </div>
 
             </div>
@@ -192,6 +251,9 @@
       //call action vuex "getCartsData"
       await store.dispatch('web/cart/getCartsData')
 
+      //call action vuex "getProvincesData"
+      await store.dispatch('web/rajaongkir/getProvincesData')
+
     },
 
     //computed
@@ -211,6 +273,21 @@
       cartPrice() {
         return this.$store.state.web.cart.cartPrice
       },
+
+      //provinces
+      provinces() {
+        return this.$store.state.web.rajaongkir.provinces
+      },
+
+      //cities
+      cities() {
+        return this.$store.state.web.rajaongkir.cities
+      },
+
+      //costs
+      costs() {
+        return this.$store.state.web.rajaongkir.costs
+      }
     },
 
     //data function
@@ -229,49 +306,123 @@
           phone: false,
           address: false
         },
+
+        //state rajaongkir
+        rajaongkir: {
+          province_id: '',
+          city_id: ''
+        },
+
+        //state courier
+        courier: {
+          showCourier: false,
+          showService: false,
+          courier_name: '',
+          courier_service_cost: '',
+          courier_service: '',
+          courier_cost: ''
+        },
+
+        //grandTotal
+        grandTotal: 0,
+
+        //state button checkout
+        btnCheckout: false
       }
     },
 
     //method
     methods: {
 
-        //method "removeCart"
-        async removeCart(cartId) {
+      //method "removeCart"
+      async removeCart(cartId) {
 
-            await this.$swal.fire({
-                title: 'APAKAH ANDA YAKIN ?',
-                text: "INGIN MENGHAPUS DATA INI !",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'YA, HAPUS!',
-                cancelButtonText: 'TIDAK',
-            }).then((result) => {
-                if (result.isConfirmed) {
+        await this.$swal.fire({
+          title: 'APAKAH ANDA YAKIN ?',
+          text: "INGIN MENGHAPUS DATA INI !",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'YA, HAPUS!',
+          cancelButtonText: 'TIDAK',
+        }).then((result) => {
+          if (result.isConfirmed) {
 
-                    //call action vuex "getCartsData"
-                    this.$store.dispatch('web/cart/removeCart', {
-                        cart_id: cartId
-                    })
+              //call action vuex "getCartsData"
+              this.$store.dispatch('web/cart/removeCart', {
+                  cart_id: cartId
+               })
 
-                    .then(async () => {
+              .then(async () => {
 
-                        //dispatch action "getCartPrice"
-                        await this.$store.dispatch('web/cart/getCartPrice')
+                  //dispatch action "getCartPrice"
+                  await this.$store.dispatch('web/cart/getCartPrice')
 
-                        //alert
-                        this.$swal.fire({
-                            title: 'BERHASIL!',
-                            text: "Product Berhasil Dihapus dari Keranjang!",
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 2000
-                        })
+                  //sum grandTotal after remove cart
+                  this.grandTotal = parseInt(this.cartPrice) + parseInt(this.courier.courier_cost)
 
-                    })
-                }
-            })
+                  //alert
+                  this.$swal.fire({
+                      title: 'BERHASIL!',
+                      text: "Product Berhasil Dihapus dari Keranjang!",
+                      icon: 'success',
+                      showConfirmButton: false,
+                      timer: 2000
+                  })
+
+              })
+          }
+        })
+      },
+
+      //method "getCities"
+      getCities() {
+        this.$store.dispatch('web/rajaongkir/getCitiesData', {
+          province_id: this.rajaongkir.province_id
+        })
+      },
+
+      //method "showCourier"
+      showCourier() {
+        this.courier.showCourier = true
+      },
+
+      //method "showService"
+      async showService() {
+
+        //check weight product
+        if (this.cartWeight == 0) {
+          alert('silahkan pilih produk terlebih dahulu!')
+          return
+        }
+
+        await this.$store.dispatch('web/rajaongkir/getOngkirData', {
+            destination: this.rajaongkir.city_id,
+            weight: this.cartWeight,
+            courier: this.courier.courier_name
+          })
+
+          .then(() => {
+            this.courier.showService = true
+          })
+      },
+
+      //method "getServiceCost"
+      getServiceCost() {
+
+        //split value dengan menghapus string -> |
+        let shipping = this.courier.courier_service_cost.split("|")
+
+        //set state cost dan service
+        this.courier.courier_cost = shipping[0]
+        this.courier.courier_service = shipping[1]
+
+        //sum grandTotal
+        this.grandTotal = parseInt(this.cartPrice) + parseInt(this.courier.courier_cost)
+
+        //show button checkout
+        this.btnCheckout = true
       },
     }
 
