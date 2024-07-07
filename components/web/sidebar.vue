@@ -11,6 +11,9 @@
 
         <nuxt-link :to="{name: 'customer-invoices'}" class="list-group-item text-decoration-none text-dark text-uppercase"><i class="fa fa-shopping-cart"></i> My Orders
         </nuxt-link>
+        <nuxt-link :to="{name: 'customer-skins'}" class="list-group-item text-decoration-none text-dark text-uppercase"><i class="fa fa-address-card"></i> Skins
+        </nuxt-link>
+
 
         <a @click="logout" class="list-group-item text-decoration-none text-dark text-uppercase"
           style="cursor: pointer;"><i class="fa fa-sign-out-alt"></i> Logout
