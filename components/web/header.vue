@@ -55,6 +55,7 @@
               </div>
             </li>
             <li class="nav-item"> <nuxt-link :to="{name: 'products'}" class="nav-link" data-abc="true"><i class="fa fa-shopping-bag"></i> SEMUA PRODUK</nuxt-link> </li>
+            <li class="nav-item"> <nuxt-link :to="{name: 'recomended'}" class="nav-link" data-abc="true"><i class="fa fa-id-badge"></i> Rekomendasi Produk</nuxt-link> </li>
             <li class="nav-item"> <a href="#" class="nav-link" data-abc="true"><i class="fa fa-info-circle"></i> TENTANG</a> </li>
             <li class="nav-item"> <a href="#" class="nav-link" data-abc="true"><i class="fa fa-comments"></i> KONTAK</a> </li>
           </ul>
