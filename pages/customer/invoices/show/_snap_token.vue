@@ -288,7 +288,7 @@
         //success
         .then(() => {
 
-            //feresh data
+          //feresh data
           this.$nuxt.refresh()
 
           //clear state

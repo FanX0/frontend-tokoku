@@ -184,7 +184,7 @@
               </div>
 
                <div class="col-md-12" v-if="btnCheckout">
-                <button class="btn btn-warning btn-lg btn-block">CHECKOUT</button>
+                <button @click.prevent="checkout" class="btn btn-warning btn-lg btn-block">CHECKOUT</button>
               </div>
 
             </div>
@@ -220,16 +220,16 @@
     //meta
     head() {
       return {
-        title: 'Cart - IAASTANTI GLOWSCARE',
+        title: 'Cart - MI STORE - Distributor Xiaomi Indonesia Resmi',
         meta: [{
             hid: 'og:title',
             name: 'og:title',
-            content: 'Cart - IAASTANTI GLOWSCARE'
+            content: 'Cart - MI STORE - Distributor Xiaomi Indonesia Resmi'
           },
           {
             hid: 'og:site_name',
             name: 'og:site_name',
-            content: 'Cart - IAASTANTI GLOWSCARE'
+            content: 'Cart - MI STORE - Distributor Xiaomi Indonesia Resmi'
           },
           {
             hid: 'og:image',
@@ -239,7 +239,7 @@
           {
             hid: 'description',
             name: 'description',
-            content: 'Cart - IAASTANTI GLOWSCARE'
+            content: 'Cart - Official Toko Online Penjualan Produk Xiaomi'
           },
         ]
       }
@@ -424,6 +424,69 @@
         //show button checkout
         this.btnCheckout = true
       },
+
+      //method "checkout"
+      async checkout() {
+
+        //ceck apakah ada nama, phone, address dan berat produk ?
+        if (this.customer.name && this.customer.phone && this.customer.address && this.cartWeight) {
+
+          //define formData
+          let formData = new FormData();
+
+          formData.append('courier', this.courier.courier_name)
+          formData.append('courier_service', this.courier.courier_service)
+          formData.append('courier_cost', this.courier.courier_cost)
+          formData.append('weight', this.cartWeight)
+          formData.append('name', this.customer.name)
+          formData.append('phone', this.customer.phone)
+          formData.append('address', this.customer.address)
+          formData.append('city_id', this.rajaongkir.city_id)
+          formData.append('province_id', this.rajaongkir.province_id)
+          formData.append('grand_total', this.grandTotal)
+
+          //sending data to action "storeCheckout" vuex
+          await this.$store.dispatch('web/checkout/storeCheckout', formData)
+
+            //success
+            .then(response => {
+
+              //sweet alert
+              this.$swal.fire({
+                title: 'BERHASIL!',
+                text: "Checkout Berhasil Dilakukan!",
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000
+              })
+
+              //redirect route "detail invoice"
+              this.$router.push({
+                name: 'customer-invoices-show-snap_token',
+                params: {
+                  snap_token: response.snap_token
+                }
+              })
+
+            })
+
+        }
+
+        //check validasi name
+        if (!this.customer.name) {
+          this.validation.name = true
+        }
+
+        //check validasi phone
+        if (!this.customer.phone) {
+          this.validation.phone = true
+        }
+
+        //check validasi address
+        if (!this.customer.address) {
+          this.validation.address = true
+        }
+      }
     }
 
   }
