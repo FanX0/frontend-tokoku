@@ -2,13 +2,13 @@
   <div id="app">
     <h1>Firebase Plugin Initialization</h1>
     <p>Firebase has been initialized successfully.</p>
-    <p v-if="token">Device Token: {{ token }}</p>
+    <p v-if="token">Device Token  hahaha jj dlu guys: {{ token }}   KONTOL</p>
   </div>
 </template>
 
 <script>
 import { initializeApp } from 'firebase/app';
-import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAQuDGUwhr692CaUN9UZAzh833LdXj-qF8",
@@ -30,42 +30,28 @@ export default {
       error: null
     };
   },
+
   mounted() {
-    if (typeof window !== 'undefined') {
-      const messaging = getMessaging();
+    const messaging = getMessaging(app);
+    getToken(messaging, { vapidKey: 'BBPJVv8-5e9M3CggcdRBzKk-efAkWzNOZB_S98a2DLtzheeFTz5NMob_jslEMs3PbovITc870YjqLeEkw5v1R58' }).then((currentToken) => {
+      if (currentToken) {
+        this.token = currentToken;
+        console.log('Device token: ', currentToken);
+      } else {
+        console.log('No registration token available. Request permission to generate one.');
+      }
+    }).catch((err) => {
+      console.log('An error occurred while retrieving token. ', err);
+      this.error = err;
+    });
 
-      // Request permission and get token
-      Notification.requestPermission().then((permission) => {
-        if (permission === 'granted') {
-          getToken(messaging, { vapidKey: ' BBPJVv8-5e9M3CggcdRBzKk-efAkWzNOZB_S98a2DLtzheeFTz5NMob_jslEMs3PbovITc870YjqLeEkw5v1R58 ' })
-            .then((currentToken) => {
-              if (currentToken) {
-                console.log('Device token:', currentToken);
-                this.token = currentToken;
-                // Here you would send the token to your backend
-              } else {
-                console.error('No registration token available. Request permission to generate one.');
-              }
-            })
-            .catch((err) => {
-              console.error('An error occurred while retrieving token.', err);
-              this.error = err;
-            });
-        } else {
-          console.error('Unable to get permission to notify.');
-        }
-      });
-
-      // Handle incoming messages
-      onMessage(messaging, (payload) => {
-        console.log('Message received. ', payload);
-        // Customize notification here
-      });
-    }
-  }
+    onMessage(messaging, (payload) => {
+      console.log('Message received. ', payload);
+      // Handle foreground messages
+    });
+  },
 };
 </script>
-
 <style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
