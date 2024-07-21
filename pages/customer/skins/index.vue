@@ -101,7 +101,7 @@
         return this.$store.state.customer.skin.skins
       },
       showAddNewButton() {
-         return this.skins.data.length <= 1;
+         return this.skins.data.length <= 0;
   }
     },
 
