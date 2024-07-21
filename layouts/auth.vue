@@ -24,6 +24,9 @@
     font-family: 'Quicksand', sans-serif;
     font-size: initial!important;
   }
+  .lebar {
+    width: 1000px;
+  }
 
   .form-control {
     height: initial;
