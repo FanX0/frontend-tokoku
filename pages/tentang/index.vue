@@ -1,63 +1,122 @@
 <template>
   <div id="app">
-    <h1>Firebase Plugin Initialization</h1>
-    <p>Firebase has been initialized successfully.</p>
-    <p v-if="token">Device Token  hahaha jj dlu guys: {{ token }}   KONTOL</p>
+
+    <section class="about-section">
+      <div class="container">
+        <h1 class="section-title">About Us</h1>
+        <p class="section-description">
+          Iaastanti Glowscare didirikan oleh Ria Risti Astanti sejak tahun 2018
+        </p>
+
+        <p class="section-description">
+          Iaastanti Glowscare fokus pada perawatan kulit dengan menyediakan berbagai produk dan layanan yang dirancang untuk meningkatkan kesehatan dan kecantikan kulit serta sangat amat karna telah teruji BPOM
+        </p>
+
+        <div class="products-services">
+          <h2 class="section-subtitle">Our Products</h2>
+          <ul class="product-list">
+            <li>Pembersih wajah</li>
+            <li>Toner</li>
+            <li>Serum</li>
+            <li>Pelembap</li>
+            <li>Masker wajah</li>
+            <li>Sunscreen</li>
+          </ul>
+
+
+        </div>
+
+
+      </div>
+    </section>
+
   </div>
 </template>
 
 <script>
-import { initializeApp } from 'firebase/app';
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAQuDGUwhr692CaUN9UZAzh833LdXj-qF8",
-  authDomain: "push-notification-57bbc.firebaseapp.com",
-  projectId: "push-notification-57bbc",
-  storageBucket: "push-notification-57bbc.appspot.com",
-  messagingSenderId: "1066753359582",
-  appId: "1:1066753359582:web:56de82e59dff3d0a778c4f",
-  measurementId: "G-8GWNSZ1LZP"
-};
-
-const app = initializeApp(firebaseConfig);
-
 export default {
-  name: 'App',
   data() {
     return {
-      token: null,
-      error: null
+      team: [
+        { id: 1, name: "Ria Risti Astanti", role: "Founder", photo: "https://via.placeholder.com/150" },
+      ]
     };
-  },
-
-  mounted() {
-    const messaging = getMessaging(app);
-    getToken(messaging, { vapidKey: 'BBPJVv8-5e9M3CggcdRBzKk-efAkWzNOZB_S98a2DLtzheeFTz5NMob_jslEMs3PbovITc870YjqLeEkw5v1R58' }).then((currentToken) => {
-      if (currentToken) {
-        this.token = currentToken;
-        console.log('Device token: ', currentToken);
-      } else {
-        console.log('No registration token available. Request permission to generate one.');
-      }
-    }).catch((err) => {
-      console.log('An error occurred while retrieving token. ', err);
-      this.error = err;
-    });
-
-    onMessage(messaging, (payload) => {
-      console.log('Message received. ', payload);
-      // Handle foreground messages
-    });
-  },
+  }
 };
 </script>
+
 <style scoped>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.header-main {
+  padding: 10px 0;
+  background-color: #171405;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #fff;
   text-align: center;
-  margin-top: 60px;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.about-section {
+
+  padding: 60px 0;
+  background: #fff;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.section-description {
+  font-size: 18px;
+  max-width: 800px;
+  margin: 0 auto 20px;
+  color: #555;
+}
+
+.products-services {
+  margin: 40px 0;
+}
+
+.section-subtitle {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.product-list,
+.service-list {
+  list-style-type: none;
+  padding: 0;
+  font-size: 18px;
+  color: #444;
+}
+
+.product-list li,
+.service-list li {
+  margin-bottom: 10px;
+}
+
+.mission-vision {
+  margin-top: 40px;
+}
+
+
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 </style>
