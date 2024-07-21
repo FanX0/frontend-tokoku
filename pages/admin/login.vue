@@ -1,48 +1,28 @@
 <template>
-  <div class="fade-in">
-    <div class="text-center mb-4">
-      <nuxt-link to="/" class="text-black">
-        <img src="/images/logo.png" width="50" alt="">
-        <h3 class="mt-2 font-weight-bold">IAASTANTI GLOWSCARE</h3>
-      </nuxt-link>
-    </div>
-    <div class="card-group">
-      <div class="card border-top-orange border-0 shadow-sm rounded">
-        <div class="card-body">
+  <div class="signup-container">
+    <div class="form-container">
+      <div class="image-section">
+        <img src="/images/ias.png" alt="logo">
+      </div>
+      <div class="form-content">
+        <div class="form-section">
           <h1>Login</h1>
-          <p class="text-muted">Sign In to your account</p>
-          <div v-if="validation.message" class="mt-2">
-            <b-alert show variant="danger">{{ validation.message }}</b-alert>
-          </div>
           <form @submit.prevent="login">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-envelope"></i>
-                </span>
-              </div>
+            <div class="input-group">
               <input class="form-control" v-model="user.email" :class="{ 'is-invalid': validation.email }" type="email" placeholder="Email Address">
             </div>
             <div v-if="validation.email" class="mt-2">
-              <b-alert show variant="danger">{{ validation.email[0] }}</b-alert>
+              <b-alert show variant="danger">{{ validation.email }}</b-alert>
             </div>
-            <div class="input-group mb-4">
-              <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fa fa-lock"></i>
-                </span>
-              </div>
+            <div class="input-group">
               <input class="form-control" v-model="user.password" :class="{ 'is-invalid': validation.password }" type="password" placeholder="Password">
             </div>
             <div v-if="validation.password" class="mt-2">
-              <b-alert show variant="danger">{{ validation.password[0] }}</b-alert>
+              <b-alert show variant="danger">{{ validation.password }}</b-alert>
             </div>
-            <div class="row">
-              <div class="col-12">
-                <button class="btn btn-warning shadow-sm rounded-sm px-4 w-100" type="submit">LOGIN</button>
-              </div>
-            </div>
+            <button class="btn" type="submit">Log in</button>
           </form>
+
         </div>
       </div>
     </div>
@@ -50,8 +30,7 @@
 </template>
 
 <script>
-  export default {
-
+export default {
     //middleware
     middleware: 'authenticated',
 
@@ -76,8 +55,7 @@
         validation: []
       }
     },
-
-    methods: {
+  methods: {
       async login() {
 
         await this.$auth.loginWith('admin', {
@@ -107,6 +85,96 @@
   }
 </script>
 
-<style>
+<style scoped>
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
+.form-container {
+  width: 100%;
+  max-width: 1000px; /* Increased max-width to accommodate the image */
+  background: #fff;
+  padding: 40px; /* Adjusted padding for better layout */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-content {
+  display: flex; /* Use flexbox to place form and image side by side */
+}
+
+.form-section {
+  flex: 1;
+  padding-right: 40px; /* Adjusted padding */
+}
+
+.image-section {
+  flex: 1; /* Allow image section to take up remaining space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section img {
+  max-width: 50%;
+  border-radius: 10px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox input {
+  margin-right: 10px;
+}
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+p a {
+  color: #007bff;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
 </style>

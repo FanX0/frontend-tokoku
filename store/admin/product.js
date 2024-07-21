@@ -74,7 +74,7 @@ export const actions = {
 
         //store to Rest API "/api/admin/products" with method "POST"
         this.$axios.post('/api/admin/products', payload)
-
+        
         //success
         .then(() => {
 

@@ -54,6 +54,7 @@ html {
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
+  border-radius: 20px;
 }
 
 body {

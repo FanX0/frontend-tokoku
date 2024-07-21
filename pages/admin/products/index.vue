@@ -4,7 +4,7 @@
       <div class="fade-in">
         <div class="row">
           <div class="col-md-12">
-            <div class="card border-0 rounded shadow-sm border-top-orange">
+            <div class="card  rounded shadow-sm border-top-orange">
               <div class="card-header">
                 <span class="font-weight-bold"><i class="fa fa-layer-group"></i> PRODUCTS</span>
               </div>
@@ -125,7 +125,7 @@
             //dispatch on action "getProductsData"
             this.$store.dispatch('admin/product/getProductsData', this.search)
         },
-        
+
    //method "destroyProduct"
    destroyProduct(id) {
           this.$swal.fire({

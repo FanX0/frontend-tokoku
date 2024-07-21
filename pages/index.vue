@@ -7,7 +7,7 @@
     <!-- end slider -->
 
      <!-- product -->
-     <div class="container-fluid mt-4 mb-5">
+     <div class="container mt-4 mb-5">
       <div class="mb-4">
         <h5 class="text-uppercase"><i class="fa fa-shopping-bag"></i> PRODUK TERBARU</h5>
         <!-- Solid divider -->
@@ -16,17 +16,17 @@
       <div class="row">
 
         <div class="col-md-3 mt-1 mb-4" v-for="product in products.data" :key="product.id">
-          <div class="card h-100 border-0 rounded shadow-sm">
+          <div class="card h-100 border-0 border-rounded black-border">
             <div class="card-body">
               <div class="card-img-actions">
                 <img :src="product.image" class="card-img img-fluid">
-              </div>
+                </div>
             </div>
-            <div class="card-body bg-light-custom text-center rounded-bottom">
+            <div class="card-body bg-light-custom rounded-bottom">
               <div class="mb-2">
-                <h6 class="font-weight-semibold mb-2">
+                <h3 class="font-weight-bold mb-2">
                   <nuxt-link :to="{name: 'products-slug', params: {slug: product.slug}}" class="text-default mb-2" data-abc="true">{{ product.title }}</nuxt-link>
-                </h6>
+                </h3>
                 <nuxt-link :to="{name: 'categories-slug', params: {slug: product.category.slug}}" class="text-muted" data-abc="true">{{ product.category.name }}</nuxt-link>
               </div>
               <h6 class="mb-0 font-weight-semibold"><s class="text-red">Rp. {{ formatPrice(product.price) }}</s> / <strong>{{ product.discount }} %</strong></h6>
@@ -110,5 +110,10 @@
 </script>
 
 <style>
-
+.container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 150px;
+}
 </style>
