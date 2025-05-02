@@ -43,7 +43,7 @@
         <div class="card border-0 rounded border-top-orange shadow-sm">
           <div class="card-body">
             <div class="col-sm-12 empty-cart-cls text-center">
-              <img src="/images/skinku.jpg" width="150" height="150" class="img-fluid mb-4 mr-3">
+              <img src="/images/Normal.png" width="150" height="150" class="img-fluid mb-4 mr-3">
               <h3><strong>Silahnkan Memasukan Jenis kulit terlebih dahulu :)</strong></h3>
               <nuxt-link :to="{name: 'customer-skins-create'}" class="btn btn-warning btn-lg mt-4" data-abc="true">Klik disini
               </nuxt-link>
@@ -65,26 +65,26 @@
     //meta
     head() {
       return {
-        title: 'Cart - MI STORE - Distributor Xiaomi Indonesia Resmi',
+        title: 'Rekomendasi Produk - Iaastanti Glowscare',
         meta: [{
             hid: 'og:title',
             name: 'og:title',
-            content: 'Cart - MI STORE - Distributor Xiaomi Indonesia Resmi'
+            content: 'Rekomendasi Produk - Iaastanti Glowscare'
           },
           {
             hid: 'og:site_name',
             name: 'og:site_name',
-            content: 'Cart - MI STORE - Distributor Xiaomi Indonesia Resmi'
+            content: 'Rekomendasi Produk - Iaastanti Glowscare'
           },
           {
             hid: 'og:image',
             name: 'og:image',
-            content: '/images/shopping-cart.png'
+            content: '/images/Normal.png'
           },
           {
             hid: 'description',
             name: 'description',
-            content: 'Cart - Official Toko Online Penjualan Produk Xiaomi'
+            content: 'Rekomendasi Produk - Iaastanti Glowscare'
           },
         ]
       }

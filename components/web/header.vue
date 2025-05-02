@@ -39,7 +39,7 @@
           </div>
         </div>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#dropdown6"
-          aria-expanded="false"> <span class="navbar-toggler-icon"></span> </button>
+          aria-expanded="false"> <span class="fa fa-list-ul"></span> </button>
         <div class="navbar-collapse collapse" id="dropdown6">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
