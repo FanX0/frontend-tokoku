@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid mt-custom">
+  <div class="container mt-custom">
     <div class="fade-in">
       <div class="row">
           <div class="col-md-12">
@@ -89,5 +89,10 @@ export default {
 </script>
 
 <style>
-
+.container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 150px;
+}
 </style>

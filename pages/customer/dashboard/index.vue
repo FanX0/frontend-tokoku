@@ -89,23 +89,37 @@
 </template>
 
 <script>
-  //import sidebar
-  import Sidebar from '@/components/web/sidebar.vue'
+  // Import dependencies
+  import Sidebar from '@/components/web/sidebar.vue';
+  import { initializeApp } from 'firebase/app';
+  import { getMessaging, getToken, onMessage } from "firebase/messaging";
+  import { mapActions } from 'vuex';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAQuDGUwhr692CaUN9UZAzh833LdXj-qF8",
+    authDomain: "push-notification-57bbc.firebaseapp.com",
+    projectId: "push-notification-57bbc",
+    storageBucket: "push-notification-57bbc.appspot.com",
+    messagingSenderId: "1066753359582",
+    appId: "1:1066753359582:web:56de82e59dff3d0a778c4f",
+    measurementId: "G-8GWNSZ1LZP"
+  };
+
+  const app = initializeApp(firebaseConfig);
 
   export default {
-
-    //middleware
+    // Middleware
     middleware: 'isCustomer',
 
-    //layout
+    // Layout
     layout: 'default',
 
-    //register components
+    // Register components
     components: {
       Sidebar
     },
 
-    //meta
+    // Meta
     head() {
       return {
         title: 'Dashboard - Customer',
@@ -113,19 +127,59 @@
     },
 
     async asyncData({ $axios }) {
-
-      //fetching dashboard
-      const dashboard = await $axios.$get('/api/customer/dashboard')
+      // Fetching dashboard data
+      const dashboard = await $axios.$get('/api/customer/dashboard');
 
       return {
-        //count statistik
-        'pending': dashboard.data.count.pending,
-        'success': dashboard.data.count.success,
-        'expired': dashboard.data.count.expired,
-        'failed': dashboard.data.count.failed,
+        // Count statistics
+        pending: dashboard.data.count.pending,
+        success: dashboard.data.count.success,
+        expired: dashboard.data.count.expired,
+        failed: dashboard.data.count.failed,
       }
     },
 
+    data() {
+      return {
+        token: null,
+        error: null
+      };
+    },
+
+    mounted() {
+      const messaging = getMessaging(app);
+      getToken(messaging, { vapidKey: 'BBPJVv8-5e9M3CggcdRBzKk-efAkWzNOZB_S98a2DLtzheeFTz5NMob_jslEMs3PbovITc870YjqLeEkw5v1R58' }).then((currentToken) => {
+        if (currentToken) {
+          this.token = currentToken;
+          console.log('Device token: ', currentToken);
+          this.sendTokenToServer({ token: currentToken }); // Send token to the server
+        } else {
+          console.log('No registration token available. Request permission to generate one.');
+        }
+      }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+        this.error = err;
+      });
+
+      onMessage(messaging, (payload) => {
+        console.log('Message received. ', payload);
+        // Handle foreground messages
+      });
+    },
+
+    methods: {
+      ...mapActions('customer/token', ['storeToken']),
+
+      sendTokenToServer(payload) {
+        this.storeToken(payload)
+          .then(response => {
+            console.log('Token successfully sent to the server.');
+          })
+          .catch(error => {
+            console.error('Error sending token to the server: ', error);
+          });
+      }
+    }
   }
 </script>
 

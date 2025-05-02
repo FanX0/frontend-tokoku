@@ -1,5 +1,5 @@
 <template>
-  <header class="section-header fixed-top">
+  <header class="section-header  fixed-top">
     <section class="header-main border-bottom">
       <div class="container-fluid">
         <div class="row align-items-center">
@@ -28,7 +28,7 @@
         </div>
       </div>
     </section>
-    <nav class="navbar navbar-expand-md navbar-main border-bottom p-2">
+    <nav  class="navbar myheader navbar-expand-md navbar-main border-bottom p-2">
       <div class="container-fluid">
         <div class="d-md-none my-2">
           <div class="input-group">
@@ -39,7 +39,7 @@
           </div>
         </div>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#dropdown6"
-          aria-expanded="false"> <span class="navbar-toggler-icon"></span> </button>
+          aria-expanded="false"> <span class="fa fa-list-ul"></span> </button>
         <div class="navbar-collapse collapse" id="dropdown6">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
@@ -56,8 +56,8 @@
             </li>
             <li class="nav-item"> <nuxt-link :to="{name: 'products'}" class="nav-link" data-abc="true"><i class="fa fa-shopping-bag"></i> SEMUA PRODUK</nuxt-link> </li>
             <li class="nav-item"> <nuxt-link :to="{name: 'recomended'}" class="nav-link" data-abc="true"><i class="fa fa-id-badge"></i> Rekomendasi Produk</nuxt-link> </li>
-            <li class="nav-item"> <a href="#" class="nav-link" data-abc="true"><i class="fa fa-info-circle"></i> TENTANG</a> </li>
-            <li class="nav-item"> <a href="#" class="nav-link" data-abc="true"><i class="fa fa-comments"></i> KONTAK</a> </li>
+            <li class="nav-item"> <nuxt-link  :to="{name:'tentang'}" class="nav-link" data-abc="true"><i class="fa fa-info-circle"></i> TENTANG</nuxt-link> </li>
+            <li class="nav-item"> <nuxt-link  :to="{name:'kontaks'}" class="nav-link" data-abc="true"><i class="fa fa-comments"></i> KONTAK</nuxt-link> </li>
           </ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown" v-if="!$auth.loggedIn">

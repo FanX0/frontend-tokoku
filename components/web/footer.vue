@@ -1,5 +1,5 @@
 <template>
-  <footer class="pt-5" style="background: rgb(255, 255, 255); border-top: 5px solid #3c4b64;">
+  <footer class="pt-5 myfooter" style="background: rgb(255, 255, 255);  box-shadow: 0 4px 50px rgba(0, 0, 0, 0.1);">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-5 mb-4">

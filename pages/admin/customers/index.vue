@@ -12,7 +12,12 @@
 
                 <div class="form-group">
                   <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <nuxt-link :to="{name: 'admin-customers-create'}" class="btn btn-warning btn-sm" style="padding-top: 10px;">
+                            <i class="fa fa-plus-circle"></i> ADD NEW</nuxt-link>
+                        </div>
                     <input type="text" class="form-control" v-model="search" @keypress.enter="searchData" placeholder="cari berdasarkan nama customer">
+
                     <div class="input-group-append">
                       <button @click="searchData" class="btn btn-warning"><i class="fa fa-search"></i>
                         SEARCH
@@ -22,6 +27,12 @@
                 </div>
 
                 <b-table striped bordered hover :items="customers.data" :fields="fields" show-empty>
+                  <template v-slot:cell(actions)="row">
+                   <b-button :to="{name: 'admin-customers-edit-id', params: {id: row.item.id}}" variant="info" size="sm">
+                      EDIT
+                    </b-button>
+                    <b-button variant="danger" size="sm" @click="destroyProduct(row.item.id)">DELETE</b-button>
+                  </template>
                 </b-table>
 
                 <!-- pagination -->
@@ -65,8 +76,14 @@
           {
             label: 'Joined',
             key: 'created_at'
+          },
+          {
+            label: 'Actions',
+            key: 'actions',
+            tdClass: 'text-center'
           }
         ],
+
 
         //state search
         search: ''
@@ -110,6 +127,40 @@
             this.$store.dispatch('admin/customer/getCustomersData', this.search)
         },
 
+    //method "destroyProduct"
+    destroyProduct(id) {
+          this.$swal.fire({
+            title: 'APAKAH ANDA YAKIN ?',
+            text: "INGIN MENGHAPUS DATA INI !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'YA, HAPUS!',
+            cancelButtonText: 'TIDAK',
+          }).then((result) => {
+            if (result.isConfirmed) {
+
+              //dispatch to action "deleteCategory" vuex
+              this.$store.dispatch('admin/customer/destroyCustomer', id)
+                .then(() => {
+
+                  //feresh data
+                  this.$nuxt.refresh()
+
+                  //alert
+                  this.$swal.fire({
+                    title: 'BERHASIL!',
+                    text: "Data Berhasil Dihapus!",
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                  })
+
+                })
+            }
+          })
+        }
     }
 
   }

@@ -12,10 +12,7 @@
 
                 <div class="form-group">
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <nuxt-link :to="{name: 'admin-users-create'}" class="btn btn-warning btn-sm" style="padding-top: 10px;">
-                            <i class="fa fa-plus-circle"></i> ADD NEW</nuxt-link>
-                        </div>
+
                         <input type="text" class="form-control" v-model="search" @keypress.enter="searchData" placeholder="cari berdasarkan nama user">
                         <div class="input-group-append">
                             <button @click="searchData" class="btn btn-warning"><i class="fa fa-search"></i>
@@ -29,12 +26,7 @@
                   <template v-slot:cell(image)="data">
                       <img class="img-fluid" width="50" :src="data.item.image" />
                   </template>
-                  <template v-slot:cell(actions)="row">
-                    <b-button :to="{name: 'admin-users-edit-id', params: {id: row.item.id}}" variant="info" size="sm">
-                      EDIT
-                    </b-button>
-                    <b-button variant="danger" size="sm" @click="destroyUser(row.item.id)">DELETE</b-button>
-                  </template>
+
                 </b-table>
 
                 <!-- pagination -->
@@ -75,11 +67,6 @@
             label: 'Email Address',
             key: 'email'
           },
-          {
-            label: 'Actions',
-            key: 'actions',
-            tdClass: 'text-center'
-          }
         ],
 
         //state search

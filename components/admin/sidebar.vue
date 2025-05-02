@@ -1,55 +1,55 @@
 <template>
-  <ul class="c-sidebar-nav">
+  <ul class="c-sidebar-nav sidebarku">
 
-    <li class="c-sidebar-nav-item"><nuxt-link :to="{name: 'admin-dashboard'}" class="c-sidebar-nav-link" href="index.html">
-        <svg class="c-sidebar-nav-icon">
-          <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-speedometer"></use>
+    <li class="c-sidebar-nav-item"><nuxt-link :to="{name: 'admin-dashboard'}" class="c-sidebar-nav-link black-text " href="index.html">
+        <svg class="c-sidebar-nav-icon ">
+          <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-speedometer" class="black-text"></use>
         </svg> Dashboard</nuxt-link></li>
 
-    <li class="c-sidebar-nav-title">MASTER DATA</li>
+    <li class="c-sidebar-nav-title black-text">MASTER DATA</li>
 
-    <li class="c-sidebar-nav-item"><nuxt-link :to="{name: 'admin-categories'}" class="c-sidebar-nav-link">
+    <li class="c-sidebar-nav-item"><nuxt-link :to="{name: 'admin-categories'}" class="c-sidebar-nav-link black-text">
    <svg class="c-sidebar-nav-icon">
-     <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-folder"></use>
+     <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-folder"  class="black-text"></use>
    </svg> Categories</nuxt-link>
     </li>
 
-    <li class="c-sidebar-nav-item"> <nuxt-link :to="{name: 'admin-products'}"  class="c-sidebar-nav-link">
+    <li class="c-sidebar-nav-item"> <nuxt-link :to="{name: 'admin-products'}"  class="c-sidebar-nav-link black-text">
         <svg class="c-sidebar-nav-icon">
-          <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-layers"></use>
+          <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-layers"  class="black-text"></use>
         </svg> Products</nuxt-link>
     </li>
 
-    <li class="c-sidebar-nav-title">ORDERS</li>
+    <li class="c-sidebar-nav-title black-text black-text">ORDERS</li>
 
-    <li class="c-sidebar-nav-item"> <nuxt-link :to="{name: 'admin-invoices'}" class="c-sidebar-nav-link">
+    <li class="c-sidebar-nav-item"> <nuxt-link :to="{name: 'admin-invoices'}" class="c-sidebar-nav-link black-text">
         <svg class="c-sidebar-nav-icon">
-          <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-cart"></use>
+          <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-cart"  class="black-text"></use>
         </svg> Invoices </nuxt-link>
     </li>
 
-    <li class="c-sidebar-nav-title">OTHERS</li>
+    <li class="c-sidebar-nav-title black-text">OTHERS</li>
 
     <li class="c-sidebar-nav-item">
-    <nuxt-link :to="{name: 'admin-customers'}" class="c-sidebar-nav-link">
+    <nuxt-link :to="{name: 'admin-customers'}" class="c-sidebar-nav-link black-text">
         <svg class="c-sidebar-nav-icon">
-            <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-user"></use>
+            <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-user"  class="black-text"></use>
         </svg> Customers
     </nuxt-link>
 </li>
 
 <li class="c-sidebar-nav-item">
-    <nuxt-link :to="{name: 'admin-sliders'}" class="c-sidebar-nav-link">
+    <nuxt-link :to="{name: 'admin-sliders'}" class="c-sidebar-nav-link black-text">
         <svg class="c-sidebar-nav-icon">
-            <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-laptop"></use>
+            <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-laptop" class="black-text"></use>
         </svg> Sliders
     </nuxt-link>
 </li>
 
 <li class="c-sidebar-nav-item">
-    <nuxt-link :to="{name: 'admin-users'}" class="c-sidebar-nav-link">
+    <nuxt-link :to="{name: 'admin-users'}" class="c-sidebar-nav-link black-text">
         <svg class="c-sidebar-nav-icon">
-            <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-group"></use>
+            <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-group"  class="black-text"></use>
         </svg> Users
     </nuxt-link>
 </li>
@@ -68,4 +68,9 @@
   a.nuxt-link-active {
     background: rgba(255,255,255,.05)!important;
   }
+  .black-text {
+  color: black;
+  fill: black;
+  }
+
 </style>

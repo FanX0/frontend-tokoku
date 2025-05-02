@@ -82,5 +82,10 @@
 </script>
 
 <style>
-
+.container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 150px;
+}
 </style>
